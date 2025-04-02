@@ -29,16 +29,7 @@ window.onload = () => {
   renderReviews(reviews);
 }
 // render reviews array in class .reviews
-/* 
-  <div class="review_container">
-    <img src="img url here"/>
-    <div>
-      <p> username here </p>
-      <p> star rating here </p>
-      <p> review here </p>
-    <div>
-  </div> 
-*/
+
 function renderReviews(reviews){
   reviews.forEach(review => {
     renderReview(review);
@@ -78,4 +69,26 @@ function renderReview(review){
 // ex: Star Rating: 5
 
 // on form submit 
-// add review to array and render it
+const button = document.querySelector("button");
+button.onclick = (event) => {
+  event.preventDefault();
+  formSubmit();
+}
+
+function formSubmit(){
+  // querying form values and adding to review object
+  const username = document.querySelector("#username").value;
+  const image = document.querySelector("#image").value;
+  const star = document.querySelector("#star").value;
+  const review = document.querySelector("#review").value;
+  const newReview = {
+    username,
+    image,
+    star,
+    review
+  };
+  // add new review to array and render it
+  reviews.push(newReview);
+  renderReview(newReview);
+}
+
