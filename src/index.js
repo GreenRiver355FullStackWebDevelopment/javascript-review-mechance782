@@ -27,6 +27,7 @@ const reviews = [
 // on window load
 window.onload = () => {
   renderReviews(reviews);
+  renderStars(reviews);
 }
 // render reviews array in class .reviews
 
@@ -68,6 +69,12 @@ function renderReview(review){
 // calculate and render star average in class .starRating
 // ex: Star Rating: 5
 
+function renderStars(reviews){
+  const starAverage = calculateStarAverage(reviews);
+  const display = document.querySelector(".starRating");
+  display.textContent = "Star Rating: " + starAverage;
+}
+
 // on form submit 
 const button = document.querySelector("button");
 button.onclick = (event) => {
@@ -79,16 +86,18 @@ function formSubmit(){
   // querying form values and adding to review object
   const username = document.querySelector("#username").value;
   const image = document.querySelector("#image").value;
-  const star = document.querySelector("#star").value;
+  const star = parseInt(document.querySelector("#star").value);
   const review = document.querySelector("#review").value;
+  
   const newReview = {
     username,
     image,
     star,
     review
   };
-  // add new review to array and render it
+  // add new review to array and render it and new star rating
   reviews.push(newReview);
   renderReview(newReview);
+  renderStars(reviews);
 }
 
